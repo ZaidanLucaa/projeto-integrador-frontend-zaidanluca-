@@ -1,1 +1,993 @@
-asda
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aurora Blog | Estilo & Inspiração</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #faf9f7;
+      --bg-card: #ffffff;
+      --text: #1a1a1a;
+      --text-muted: #5c5c5c;
+      --accent: #b34e1f;
+      --accent-hover: #8f3e18;
+      --border: #e8e4df;
+      --shadow: 0 4px 20px rgba(0,0,0,0.06);
+      --radius: 12px;
+      --transition: 0.25s ease;
+      --focus-ring: 0 0 0 3px rgba(179, 78, 31, 0.45);
+    }
+
+    [data-theme="dark"] {
+      --bg: #121212;
+      --bg-card: #1e1e1e;
+      --text: #f0f0f0;
+      --text-muted: #b0b0b0;
+      --accent: #e07a3d;
+      --accent-hover: #f08a4d;
+      --border: #2a2a2a;
+      --shadow: 0 4px 20px rgba(0,0,0,0.3);
+      --focus-ring: 0 0 0 3px rgba(224, 122, 61, 0.55);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background var(--transition), color var(--transition);
+    }
+
+    /* Focus visível para teclado */
+    :focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: color var(--transition);
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Skip link */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 16px;
+      background: var(--accent);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      z-index: 1000;
+      transition: top 0.2s;
+    }
+
+    .skip-link:focus {
+      top: 16px;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    nav a {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding: 6px 4px;
+      border-radius: 4px;
+    }
+
+    nav a:hover,
+    nav a.active,
+    nav a[aria-current="page"] {
+      color: var(--accent);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .theme-toggle,
+    .menu-toggle {
+      background: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      font-size: 1.2rem;
+      color: var(--text);
+      padding: 8px 10px;
+      border-radius: 8px;
+      transition: background var(--transition), border-color var(--transition);
+      line-height: 1;
+    }
+
+    .theme-toggle:hover,
+    .menu-toggle:hover {
+      background: var(--border);
+    }
+
+    .menu-toggle {
+      display: none;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      margin-bottom: 16px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin: 0 auto 32px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      transition: background var(--transition), transform 0.2s;
+    }
+
+    .btn:hover {
+      background: var(--accent-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn:focus-visible {
+      box-shadow: var(--focus-ring);
+    }
+
+    /* ===== LAYOUT ===== */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 48px;
+      padding-bottom: 80px;
+    }
+
+    /* ===== POSTS ===== */
+    .section-title {
+      font-size: 1.6rem;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .posts-grid {
+      display: grid;
+      gap: 32px;
+    }
+
+    .post-card {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .post-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+    }
+
+    .post-image {
+      height: 220px;
+      background: linear-gradient(135deg, #e8d5c4, #d4b8a5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .post-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .post-card:hover .post-image img {
+      transform: scale(1.05);
+    }
+
+    .post-category {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: var(--accent);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .post-content {
+      padding: 24px;
+    }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .post-meta .dot {
+      width: 4px;
+      height: 4px;
+      background: var(--text-muted);
+      border-radius: 50%;
+    }
+
+    .post-title {
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+    }
+
+    .post-title a:hover {
+      color: var(--accent);
+    }
+
+    .post-excerpt {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .read-more {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .read-more:hover {
+      gap: 10px;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .widget {
+      background: var(--bg-card);
+      border-radius: var(--radius);
+      padding: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .widget h3 {
+      font-size: 1.15rem;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .search-box {
+      display: flex;
+      gap: 8px;
+    }
+
+    .search-box label {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      border: 0;
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color var(--transition);
+    }
+
+    .search-box input:focus {
+      border-color: var(--accent);
+    }
+
+    .search-box button {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background var(--transition);
+      font-size: 1rem;
+    }
+
+    .search-box button:hover {
+      background: var(--accent-hover);
+    }
+
+    .category-list {
+      list-style: none;
+    }
+
+    .category-list li {
+      margin-bottom: 10px;
+    }
+
+    .category-list a {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      padding: 6px 0;
+      border-radius: 4px;
+    }
+
+    .category-list a:hover {
+      color: var(--accent);
+    }
+
+    .category-list span {
+      background: var(--bg);
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+    }
+
+    .recent-post {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .recent-post:last-child {
+      margin-bottom: 0;
+    }
+
+    .recent-thumb {
+      width: 70px;
+      height: 70px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #d4b8a5, #c4a48e);
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .recent-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .recent-info h4 {
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+    }
+
+    .recent-info h4 a:hover {
+      color: var(--accent);
+    }
+
+    .recent-info span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+      padding: 48px 0 32px;
+      margin-top: 40px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand .logo {
+      margin-bottom: 16px;
+      display: inline-block;
+    }
+
+    .footer-brand p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 280px;
+    }
+
+    .footer-links h4 {
+      font-size: 1rem;
+      margin-bottom: 16px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+    }
+
+    .footer-links a {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      padding: 2px 0;
+      border-radius: 4px;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* ===== MOBILE MENU ===== */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 72px;
+      left: 0;
+      right: 0;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+      padding: 24px;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 99;
+    }
+
+    .mobile-menu.open {
+      display: flex;
+    }
+
+    .mobile-menu a {
+      font-size: 1.1rem;
+      font-weight: 500;
+      padding: 12px 8px;
+      border-radius: 6px;
+    }
+
+    .mobile-menu a:hover,
+    .mobile-menu a:focus {
+      background: var(--border);
+      color: var(--accent);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero {
+        padding: 60px 0 40px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .post-image {
+        height: 180px;
+      }
+    }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .post-card {
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    .post-card:nth-child(2) { animation-delay: 0.1s; }
+    .post-card:nth-child(3) { animation-delay: 0.2s; }
+    .post-card:nth-child(4) { animation-delay: 0.3s; }
+  </style>
+</head>
+<body>
+  <!-- Skip link para acessibilidade -->
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- HEADER -->
+  <header role="banner">
+    <div class="container header-inner">
+      <a href="#" class="logo" aria-label="Aurora Blog - Página inicial">Aurora<span>.</span></a>
+      
+      <nav aria-label="Navegação principal">
+        <a href="#" aria-current="page">Início</a>
+        <a href="#">Artigos</a>
+        <a href="#">Categorias</a>
+        <a href="#">Sobre</a>
+        <a href="#">Contato</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Alternar entre tema claro e escuro" title="Alternar tema">
+          🌙
+        </button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu de navegação" aria-expanded="false" aria-controls="mobileMenu" title="Menu">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Menu mobile" hidden>
+    <a href="#">Início</a>
+    <a href="#">Artigos</a>
+    <a href="#">Categorias</a>
+    <a href="#">Sobre</a>
+    <a href="#">Contato</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="container">
+      <h1 id="hero-title">Ideias que inspiram, histórias que transformam</h1>
+      <p>Um espaço para explorar design, lifestyle, tecnologia e tudo o que torna a vida mais interessante.</p>
+      <a href="#posts" class="btn">Explorar artigos</a>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <div class="container">
+    <div class="main-grid">
+      <!-- POSTS -->
+      <main id="conteudo-principal">
+        <section id="posts" aria-labelledby="ultimos-artigos">
+          <h2 class="section-title" id="ultimos-artigos">Últimos Artigos</h2>
+          
+          <div class="posts-grid">
+            <!-- Post 1 -->
+            <article class="post-card">
+              <div class="post-image">
+                <span class="post-category">Design</span>
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&q=80" 
+                     alt="Espaço minimalista com tons terrosos e iluminação suave">
+              </div>
+              <div class="post-content">
+                <div class="post-meta">
+                  <time datetime="2026-11-12">12 Nov 2026</time>
+                  <span class="dot" aria-hidden="true"></span>
+                  <span>6 min de leitura</span>
+                </div>
+                <h3 class="post-title">
+                  <a href="#">O poder do minimalismo no design contemporâneo</a>
+                </h3>
+                <p class="post-excerpt">
+                  Menos é mais. Descubra como o minimalismo continua influenciando espaços, interfaces e o nosso dia a dia de forma profunda e elegante.
+                </p>
+                <a href="#" class="read-more">Ler artigo <span aria-hidden="true">→</span></a>
+              </div>
+            </article>
+
+            <!-- Post 2 -->
+            <article class="post-card">
+              <div class="post-image">
+                <span class="post-category">Lifestyle</span>
+                <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&q=80" 
+                     alt="Pessoa escrevendo em um caderno ao lado de um laptop">
+              </div>
+              <div class="post-content">
+                <div class="post-meta">
+                  <time datetime="2026-11-10">10 Nov 2026</time>
+                  <span class="dot" aria-hidden="true"></span>
+                  <span>4 min de leitura</span>
+                </div>
+                <h3 class="post-title">
+                  <a href="#">Como criar uma rotina matinal que realmente funciona</a>
+                </h3>
+                <p class="post-excerpt">
+                  Esqueça as fórmulas mágicas. Aqui estão estratégias reais e realistas para começar o dia com mais clareza e energia.
+                </p>
+                <a href="#" class="read-more">Ler artigo <span aria-hidden="true">→</span></a>
+              </div>
+            </article>
+
+            <!-- Post 3 -->
+            <article class="post-card">
+              <div class="post-image">
+                <span class="post-category">Tecnologia</span>
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80" 
+                     alt="Placa de circuito eletrônico em close">
+              </div>
+              <div class="post-content">
+                <div class="post-meta">
+                  <time datetime="2026-11-08">08 Nov 2026</time>
+                  <span class="dot" aria-hidden="true"></span>
+                  <span>8 min de leitura</span>
+                </div>
+                <h3 class="post-title">
+                  <a href="#">O futuro das interfaces: o que vem depois do smartphone?</a>
+                </h3>
+                <p class="post-excerpt">
+                  Realidade aumentada, wearables e interfaces neurais. Uma análise sobre as tendências que devem definir a próxima década.
+                </p>
+                <a href="#" class="read-more">Ler artigo <span aria-hidden="true">→</span></a>
+              </div>
+            </article>
+
+            <!-- Post 4 -->
+            <article class="post-card">
+              <div class="post-image">
+                <span class="post-category">Cultura</span>
+                <img src="https://images.unsplash.com/photo-1456513080880-7d93aaa172bb?w=800&q=80" 
+                     alt="Pilha de livros abertos sobre uma mesa de madeira">
+              </div>
+              <div class="post-content">
+                <div class="post-meta">
+                  <time datetime="2026-11-05">05 Nov 2026</time>
+                  <span class="dot" aria-hidden="true"></span>
+                  <span>5 min de leitura</span>
+                </div>
+                <h3 class="post-title">
+                  <a href="#">Por que voltamos a ler livros físicos em 2026</a>
+                </h3>
+                <p class="post-excerpt">
+                  Em um mundo hiperconectado, o papel está fazendo um retorno inesperado. Entenda o que está por trás desse movimento.
+                </p>
+                <a href="#" class="read-more">Ler artigo <span aria-hidden="true">→</span></a>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar" aria-label="Barra lateral">
+        <!-- Search -->
+        <div class="widget">
+          <h3 id="busca-titulo">Buscar</h3>
+          <form class="search-box" role="search" aria-labelledby="busca-titulo">
+            <label for="searchInput">Buscar artigos</label>
+            <input type="search" id="searchInput" name="q" placeholder="Digite sua busca..." autocomplete="off">
+            <button type="submit" id="searchBtn" aria-label="Pesquisar">🔍</button>
+          </form>
+        </div>
+
+        <!-- Categories -->
+        <div class="widget">
+          <h3>Categorias</h3>
+          <ul class="category-list">
+            <li><a href="#">Design <span>12</span></a></li>
+            <li><a href="#">Lifestyle <span>8</span></a></li>
+            <li><a href="#">Tecnologia <span>15</span></a></li>
+            <li><a href="#">Cultura <span>6</span></a></li>
+            <li><a href="#">Produtividade <span>9</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Recent Posts -->
+        <div class="widget">
+          <h3>Recentes</h3>
+          <div class="recent-post">
+            <div class="recent-thumb">
+              <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=200&q=80" alt="">
+            </div>
+            <div class="recent-info">
+              <h4><a href="#">O poder do minimalismo</a></h4>
+              <time datetime="2026-11-12">12 Nov 2026</time>
+            </div>
+          </div>
+          <div class="recent-post">
+            <div class="recent-thumb">
+              <img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=200&q=80" alt="">
+            </div>
+            <div class="recent-info">
+              <h4><a href="#">Rotina matinal que funciona</a></h4>
+              <time datetime="2026-11-10">10 Nov 2026</time>
+            </div>
+          </div>
+          <div class="recent-post">
+            <div class="recent-thumb">
+              <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=200&q=80" alt="">
+            </div>
+            <div class="recent-info">
+              <h4><a href="#">O futuro das interfaces</a></h4>
+              <time datetime="2026-11-08">08 Nov 2026</time>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo" aria-label="Aurora Blog">Aurora<span>.</span></a>
+          <p>Um blog sobre design, estilo de vida e ideias que merecem ser compartilhadas.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Navegação</h4>
+          <a href="#">Início</a>
+          <a href="#">Artigos</a>
+          <a href="#">Categorias</a>
+          <a href="#">Sobre</a>
+        </div>
+        <div class="footer-links">
+          <h4>Categorias</h4>
+          <a href="#">Design</a>
+          <a href="#">Lifestyle</a>
+          <a href="#">Tecnologia</a>
+          <a href="#">Cultura</a>
+        </div>
+        <div class="footer-links">
+          <h4>Social</h4>
+          <a href="#" rel="noopener noreferrer">Instagram</a>
+          <a href="#" rel="noopener noreferrer">Twitter / X</a>
+          <a href="#" rel="noopener noreferrer">LinkedIn</a>
+          <a href="#">Newsletter</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Aurora Blog. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ===== THEME TOGGLE =====
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+      html.setAttribute('data-theme', 'dark');
+      themeToggle.textContent = '☀️';
+      themeToggle.setAttribute('aria-label', 'Ativar tema claro');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      if (isDark) {
+        html.removeAttribute('data-theme');
+        themeToggle.textContent = '🌙';
+        themeToggle.setAttribute('aria-label', 'Ativar tema escuro');
+        localStorage.setItem('theme', 'light');
+      } else {
+        html.setAttribute('data-theme', 'dark');
+        themeToggle.textContent = '☀️';
+        themeToggle.setAttribute('aria-label', 'Ativar tema claro');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    // ===== MOBILE MENU =====
+    const menuToggle = document.getElementById('menuToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    function openMenu() {
+      mobileMenu.classList.add('open');
+      mobileMenu.removeAttribute('hidden');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      menuToggle.setAttribute('aria-label', 'Fechar menu de navegação');
+      menuToggle.textContent = '✕';
+      // Foca no primeiro link do menu
+      const firstLink = mobileMenu.querySelector('a');
+      if (firstLink) firstLink.focus();
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.remove('open');
+      mobileMenu.setAttribute('hidden', '');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Abrir menu de navegação');
+      menuToggle.textContent = '☰';
+      menuToggle.focus();
+    }
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
+      if (isOpen) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    });
+
+    // Fecha com Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+        closeMenu();
+      }
+    });
+
+    // Fecha ao clicar em um link
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // ===== SEARCH =====
+    const searchForm = document.querySelector('.search-box');
+    const searchInput = document.getElementById('searchInput');
+
+    searchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const query = searchInput.value.trim();
+      if (query) {
+        alert(`Buscando por: "${query}"\n(Em um projeto real, isso filtraria os posts)`);
+      } else {
+        searchInput.focus();
+      }
+    });
+
+    // ===== SMOOTH SCROLL =====
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        const target = document.querySelector(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Melhora acessibilidade: move o foco para o destino
+          target.setAttribute('tabindex', '-1');
+          target.focus({ preventScroll: true });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
